@@ -10,6 +10,7 @@ public class PlayerPlatformerController : PhysicsObject {
     public Vector3 center = Vector3.zero;  
     public float maxSlope = .6f;
     public float ladderSpeed = 5;
+    public float wallJumpPropel = 2f;
     [Header("Player Results")]
     public float height;
     public bool affected;
@@ -113,7 +114,7 @@ public class PlayerPlatformerController : PhysicsObject {
             velocity.y = jumpTakeOffSpeed;
             Vector2 takeOff = Vector2.zero;
             takeOff.y = move.y;
-            takeOff.x = jumpTakeOffSpeed * 2 * (!wallSide ? 1 : -1);
+            takeOff.x = jumpTakeOffSpeed * wallJumpPropel * (!wallSide ? 1 : -1);
             wallInitial = takeOff.x;
             addVelocity(takeOff, true, true);
             affected = true;
