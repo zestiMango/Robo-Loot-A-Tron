@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Cinemachine;
 public class PlayerPlatformerController : PhysicsObject {
 
     [Header("Player Settings")]
@@ -28,6 +28,21 @@ public class PlayerPlatformerController : PhysicsObject {
         float radius = box.edgeRadius;
         size = box.size+new Vector2(2*radius,2*radius);
         height = box.size.y;
+        
+    }
+    public override void OnStartLocalPlayer () {
+        if(base.hasAuthority) {
+            GameObject.Find("Player Cam").GetComponent<CinemachineVirtualCamera>().Follow = transform;
+            GameObject.Find("Universe Cam").GetComponent<CinemachineVirtualCamera>().enabled = false;
+            GameObject.Find("Player Cam").GetComponent<CinemachineVirtualCamera>().enabled = true;
+        }
+    }
+    public override void OnStopClient () {
+        if(base.hasAuthority) {
+            GameObject.Find("Player Cam").GetComponent<CinemachineVirtualCamera>().Follow = null;
+            GameObject.Find("Universe Cam").GetComponent<CinemachineVirtualCamera>().enabled = true;
+            GameObject.Find("Player Cam").GetComponent<CinemachineVirtualCamera>().enabled = false;
+        }
     }
     public void addVelocity(Vector2 newVel, bool overwriteX, bool overwriteY) {
         Vector2 newVelocity = velocity;
