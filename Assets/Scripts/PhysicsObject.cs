@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class PhysicsObject : MonoBehaviour {
+public class PhysicsObject : NetworkBehaviour {
 
     [Header("Physics Settings")]
     public float minGroundNormalY = .65f;
@@ -50,6 +51,8 @@ public class PhysicsObject : MonoBehaviour {
 
     void Update () 
     {
+        if(!base.isLocalPlayer)
+            return;
         targetVelocity = Vector2.zero;
         ComputeVelocity ();    
     }

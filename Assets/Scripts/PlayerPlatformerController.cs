@@ -85,7 +85,7 @@ public class PlayerPlatformerController : PhysicsObject {
     protected override void ComputeVelocity()
     {
         Vector2 move = Vector2.zero;
-
+        
         move.x = Input.GetAxis("Horizontal");
         /*onLadder = canLadder ? onLadder : false;
         if (canLadder) {
