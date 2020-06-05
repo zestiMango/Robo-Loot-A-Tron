@@ -66,7 +66,7 @@ public class PlayerPlatformerController : PhysicsObject {
                 addVelocity(new Vector2(maxSpeed * movex,0), true, false);
                 return;
             }
-        }
+    }
         /*
         if(movex > 0) {
             if (velocity.x <= maxSpeed - (2f+.1f) && velocity.x >= -maxSpeed) {
